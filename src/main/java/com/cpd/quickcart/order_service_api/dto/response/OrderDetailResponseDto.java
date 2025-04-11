@@ -1,16 +1,15 @@
-package com.cpd.quickcart.order_service_api.dto.request;
+package com.cpd.quickcart.order_service_api.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDetailRequestDto {
+@Builder
+public class OrderDetailResponseDto {
     private String detailId;
     private Date productId;
     private int qty;

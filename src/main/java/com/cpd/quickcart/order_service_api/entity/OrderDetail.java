@@ -1,13 +1,7 @@
 package com.cpd.quickcart.order_service_api.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Date;
 
@@ -16,7 +10,8 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDetails {
+@Builder
+public class OrderDetail {
     @Id
     @Column(name = "detail_id",unique = true,nullable = false)
     private String detailId;
@@ -29,6 +24,8 @@ public class OrderDetails {
     @Column(name = "discount",precision = 10,scale = 2)
     private double discount;
 
-
+    @ManyToOne
+    @JoinColumn(name="customer_order_id")
+    private CustomerOrder customerOrder;
 
 }

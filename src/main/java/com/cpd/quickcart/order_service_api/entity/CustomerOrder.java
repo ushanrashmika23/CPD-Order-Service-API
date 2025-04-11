@@ -1,11 +1,11 @@
 package com.cpd.quickcart.order_service_api.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name="customer_order")
 @Getter
@@ -24,4 +24,12 @@ public class CustomerOrder {
     private String userId;
     @Column(name = "remark",length = 750)
     private String remark;
+
+    @OneToMany(mappedBy = "customerOrder")
+    private Set<OrderDetail> products=new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name="oorder_status_id")
+    private OrderStatus orderStatus;
+
 }

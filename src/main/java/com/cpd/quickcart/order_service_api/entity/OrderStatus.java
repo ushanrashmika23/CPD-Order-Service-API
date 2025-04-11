@@ -7,27 +7,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity(name="order_detail")
+@Entity(name="order_status")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDetail {
+public class OrderStatus {
     @Id
-    @Column(name = "detail_id",unique = true,nullable = false)
-    private String detailId;
-    @Column(name = "product_id",nullable = false,length = 80)
-    private Date productId;
-    @Column(name = "qty",nullable = false)
-    private int qty;
-    @Column(name = "unit_price",nullable = false,precision = 10,scale = 2)
-    private double unitPrice;
-    @Column(name = "discount",precision = 10,scale = 2)
-    private double discount;
+    @Column(name = "status_id",unique = true,nullable = false)
+    private String statusId;
+    @Column(name = "status",nullable = false,length = 80,unique = true)
+    private String status;
 
-    @ManyToOne
-    @JoinColumn(name="customer_order_id")
-    private CustomerOrder customerOrder;
+    @OneToMany(mappedBy = "orderStatus")
+    private Set<CustomerOrder> customerOrders=new HashSet<>();
 
 }
