@@ -59,6 +59,21 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     }
 
     @Override
+    public void manageRemark(String remark, String orderId) {
+        CustomerOrder customerOrder = customerOrderRepo.findById(orderId).orElseThrow(() -> new RuntimeException(String.format("Order with id %s not found", orderId)));
+        customerOrder.setRemark(remark);
+        customerOrderRepo.save(customerOrder);
+    }
+
+    @Override
+    public void manageStatus(String status, String orderId) {
+        CustomerOrder customerOrder = customerOrderRepo.findById(orderId).orElseThrow(() -> new RuntimeException(String.format("Order with id %s not found", orderId)));
+        OrderStatus orderStatus=orderStatusRepo.findByStatus(status).orElseThrow(()->new RuntimeException("Order status not found"));
+        customerOrder.setOrderStatus(orderStatus);
+        customerOrderRepo.save(customerOrder);
+    }
+
+    @Override
     public CustomerOrderResponseDto findOrderById(String orderId) {
 
         CustomerOrder customerOrder = customerOrderRepo.findById(orderId).orElseThrow(() -> new RuntimeException(String.format("Order with id %s not found", orderId)));
